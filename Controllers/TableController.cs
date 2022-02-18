@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using obss1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace obss1.Controllers
 {
     public class TableController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(UserModel usermodel)
         {
             return View();
         }

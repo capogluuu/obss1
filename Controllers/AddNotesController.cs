@@ -7,28 +7,24 @@ using System.Threading.Tasks;
 
 namespace obss1.Controllers
 {
-    public class SignupController : Controller
+    public class AddNotesController : Controller
     {
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            List<DatabaseModel> MultipleRowNotes = new List<DatabaseModel> { new DatabaseModel { studentNumber = "_studentNumber", courseName = "courseName", firstExam = 0, secondExam = 0, passState = "false" } };
+            return View(MultipleRowNotes);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index2(string studentNumber, string name, string password, string status)
+        public ActionResult Index2(List<DatabaseModel> ci)
         {
-            UserModel userInfo = new UserModel { studentNumber = studentNumber, name= name, password = password, status = status  };
             if (ModelState.IsValid)
             {
                 /*db işlemler,*/
             }
-            return View(userInfo);
+            return View(ci);
         }
     }
-
-
-
 }

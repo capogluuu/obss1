@@ -1,0 +1,176 @@
+﻿@model List<obss1.Models.DatabaseModel>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Weather Alert to Alertus System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1>Akif Emre Capoglu</h1>
+            </div>
+            <div class="col-sm-2">
+                <a href="/users" class="pull-right">
+                    <img title="profile image" class="img-circle img-responsive"
+                         src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <ul class="list-group">
+                    <li class="list-group-item text-muted">Profile</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Name Surname</strong></span>Akif Emre Capoglu</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Skills</strong></span>Python, C-Sharp, C++, Html, Sql, Css</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Education</strong></span>Galatasaray University(3.2 GPA)</li>
+
+                </ul>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+                    <div class="panel-body">
+                        <a href="https://www.linkedin.com/in/capogluuu/">linkedin.com/in/capogluuu/</a>
+                    </div>
+                    <div class="panel-body"><a href="https://github.com/capogluuu">github.com/capogluuu</a></div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                </ul>
+                @using (Html.BeginForm("Index2", "AddNotes", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    if (ViewBag.Message != null)
+                    {
+                        <div class="viewbag-message">
+                            @ViewBag.Message
+                        </div>
+                    }
+                    <div><a href="#" id="addNew">Add New Jquery</a></div>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Student Number</th>
+                                            <th>CourseName</th>
+                                            <th>FirstExam</th>
+                                            <th>SecondExam</th>
+                                            <th>PassState</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="items">
+                                        @if (Model != null && Model.Count > 0)
+                                        {
+                                            int j = 0;
+                                            foreach (var i in Model)
+                                            {
+                                                <tr style="border:1px solid black">
+                                                    <td>@Html.TextBoxFor(a => a[j].studentNumber, new { placeholder = "StudentNumber" })</td>
+                                                    <td>@Html.TextBoxFor(a => a[j].courseName, new { placeholder = "CourseName" })</td>
+                                                    <td>@Html.TextBoxFor(a => a[j].firstExam, new { placeholder = "FirstExam" })</td>
+                                                    <td>@Html.TextBoxFor(a => a[j].secondExam, new { placeholder = "SecondExam" })</td>
+                                                    <td>@Html.TextBoxFor(a => a[j].passState, new { placeholder = "true or false" })</td>
+
+                                                    <td>
+                                                        @if (j > 0)
+                                                        {
+                                                            <a href="#" class="remove">Remove</a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                j++;
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4 col-md-offset-4 text-center">
+                                        <input type="submit" value="Save Bulk Data" />
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+        }
+
+        .highlight {
+            background-color: #f18973;
+        }
+    </style>
+</body>
+</html>
+
+
+<script language="javascript">
+    $(document).ready(function () {
+        // It is from completely http://www.dotnetawesome.com/2014/08/how-to-insert-multiple-record-to-database-at-a-time-aspnet-mvc4.html
+        //1. Add new row
+        $("#addNew").click(function (e) {
+            e.preventDefault();
+            var $tableBody = $("#dataTable");
+            var $trLast = $tableBody.find("tr:last");
+            var $trNew = $trLast.clone();
+
+            var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+            $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+            $.each($trNew.find(':input'), function (i, val) {
+                // Replaced Name
+                var oldN = $(this).attr('name');
+                var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                $(this).attr('name', newN);
+                //Replaced value
+                var type = $(this).attr('type');
+                if (type.toLowerCase() == "text") {
+                    $(this).attr('value', '');
+                }
+
+                // If you have another Type then replace with default value
+                $(this).removeClass("input-validation-error");
+
+            });
+            $trLast.after($trNew);
+
+            // Re-assign Validation
+            var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+            $.validator.unobtrusive.parse(form);
+        });
+
+        // 2. Remove
+        $('a.remove').live("click", function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        });
+
+    });
+</script>
