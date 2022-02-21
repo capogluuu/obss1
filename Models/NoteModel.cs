@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace obss1.Models
 {
+    [Keyless]
     public class NoteModel
     {
         private string CourseName { get; set; }
