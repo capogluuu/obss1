@@ -1,4 +1,4 @@
-﻿@model List<obss1.Models.DatabaseModel>
+﻿@model List<obss1.Models.StudentModel>
 
 @{
     Layout = null;
@@ -28,23 +28,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">
-                <ul class="list-group">
-                    <li class="list-group-item text-muted">Profile</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong>Name Surname</strong></span>Akif Emre Capoglu</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong>Skills</strong></span>Python, C-Sharp, C++, Html, Sql, Css</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong>Education</strong></span>Galatasaray University(3.2 GPA)</li>
-
-                </ul>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-                    <div class="panel-body">
-                        <a href="https://www.linkedin.com/in/capogluuu/">linkedin.com/in/capogluuu/</a>
-                    </div>
-                    <div class="panel-body"><a href="https://github.com/capogluuu">github.com/capogluuu</a></div>
-                </div>
-            </div>
             <div class="col-sm-9">
 
                 <ul class="nav nav-tabs" id="myTab">
@@ -88,13 +71,6 @@
                                                     <td>@Html.TextBoxFor(a => a[j].firstExam, new { placeholder = "FirstExam" })</td>
                                                     <td>@Html.TextBoxFor(a => a[j].secondExam, new { placeholder = "SecondExam" })</td>
                                                     <td>@Html.TextBoxFor(a => a[j].passState, new { placeholder = "true or false" })</td>
-
-                                                    <td>
-                                                        @if (j > 0)
-                                                        {
-                                                            <a href="#" class="remove">Remove</a>
-                                                        }
-                                                    </td>
                                                 </tr>
                                                 j++;
                                             }
@@ -141,7 +117,6 @@
             var $trNew = $trLast.clone();
 
             var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
-            $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
             $.each($trNew.find(':input'), function (i, val) {
                 // Replaced Name
                 var oldN = $(this).attr('name');
@@ -165,12 +140,5 @@
                 .removeData("unobtrusiveValidation");
             $.validator.unobtrusive.parse(form);
         });
-
-        // 2. Remove
-        $('a.remove').live("click", function (e) {
-            e.preventDefault();
-            $(this).parent().parent().remove();
-        });
-
     });
 </script>

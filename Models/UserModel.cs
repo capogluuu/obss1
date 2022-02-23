@@ -17,7 +17,6 @@ namespace obss1.Models
         public UserModel(string _studentNumber, string _name, string _password, string _status)
         {
             StudentNumber = _studentNumber;
-            Name = _name;
             Password = _password;
             Status = _status;
 

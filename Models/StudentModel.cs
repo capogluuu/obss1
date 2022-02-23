@@ -9,26 +9,30 @@ namespace obss1.Models
     public class StudentModel
     {
         private Guid Id { get; set; }
-        private string Name { get; set; }
-        private string Surname { get; set; }
         private string StudentNumber { get; set; }
-        private List<NoteModel> Notes { get; set; }
-        
+        private string CourseName { get; set; }
+        private int FirstExam { get; set; }
+        private int SecondExam { get; set; }
+        private string PassState { get; set; }
+
+
         public StudentModel() { }
-        public StudentModel(string _name, string _surname, string _studentNumber, List<NoteModel> _notes)
+        public StudentModel(string _name, string _surname, string _studentNumber, string _courseName, int _firstExam, int _secondExam, string _passState)
         {
-            Name = _name;
-            Surname = _surname;
             StudentNumber = _studentNumber;
-            Notes = _notes;
+            CourseName = _courseName;
+            FirstExam = _firstExam;
+            SecondExam = _secondExam;
+            PassState = _passState;
         }
 
         [Key]
         public Guid id { get { return Id; } set { Id = value; } }
-        public string name { get { return Name; } set { Name = value; } }
-        public string surname { get { return Surname; } set { Surname = value; } }
         public string studentNumber { get { return StudentNumber; } set { StudentNumber = value; } }
-        public List<NoteModel> notes { get { return Notes; } set { Notes = value; } }
+        public string courseName { get { return CourseName; } set { CourseName = value; } }
+        public int firstExam { get { return FirstExam; } set { FirstExam = value; } }
+        public int secondExam { get { return SecondExam; } set { SecondExam = value; } }
+        public string passState { get { return PassState; } set { PassState = value; } }
 
 
     }

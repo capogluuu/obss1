@@ -12,13 +12,13 @@ namespace obss1.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<DatabaseModel> MultipleRowNotes = new List<DatabaseModel> { new DatabaseModel { studentNumber = "_studentNumber", courseName = "courseName", firstExam = 0, secondExam = 0, passState = "false" } };
+            List<StudentModel> MultipleRowNotes = new List<StudentModel> { new StudentModel { studentNumber = "_studentNumber", courseName = "courseName", firstExam = 0, secondExam = 0, passState = "false" } };
             return View(MultipleRowNotes);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index2(List<DatabaseModel> ci)
+        public ActionResult Index2(List<StudentModel> ci)
         {
             if (ModelState.IsValid)
             {

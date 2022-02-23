@@ -18,10 +18,11 @@ namespace obss1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult Index(string name, string password)
+        public IActionResult Index(string studentNumber, string password)
         {
             UserModel user = new UserModel();
-                
+            
+            
             /*check name passworn is in the database
                if it is okey
                 you should do write a query and send all of Usermodel details to Table Index 
